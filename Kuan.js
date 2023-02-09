@@ -53,6 +53,36 @@ if (obj.data) {
       (item) =>
         !(item.title === "酷安热搜")
     );
+  } else if (url.includes("/page/dataList")) {
+    // 点赞榜
+    obj.data = obj.data.filter(
+      (item) =>
+        !(item.title === "点赞榜")
+    );
+  } else if (url.includes("/page/dataList")) {
+    // 评论榜
+    obj.data = obj.data.filter(
+      (item) =>
+        !(item.title === "评论榜")
+    );
+  } else if (url.includes("/page/dataList")) {
+    // 收藏榜
+    obj.data = obj.data.filter(
+      (item) =>
+        !(item.title === "收藏榜")
+    );
+    } else if (url.includes("/page/dataList")) {
+    // 回答榜
+    obj.data = obj.data.filter(
+      (item) =>
+        !(item.title === "回答榜")
+    );
+    } else if (url.includes("/page/dataList")) {
+    // 酷图榜
+    obj.data = obj.data.filter(
+      (item) =>
+        !(item.title === "酷图榜")
+    );
   }
 }
 
