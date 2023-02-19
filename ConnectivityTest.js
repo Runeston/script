@@ -12,7 +12,7 @@ const REQUEST_HEADERS = {
     'icon-color': '#FF5A9AF9',
   }
 
-  await Promise.all([test_baidu(), test_bilibili(), test_google(), test_youtube(), test_github()])
+  await Promise.all([test_baidu(), test_Huawei(), test_google(), test_youtube(), test_github()])
     .then((result) => {
       let content = result.join('\n')
       panel_result['content'] = content
@@ -48,32 +48,32 @@ async function test_baidu() {
   
   return baidu_test_result
 }
-///bilibili
-async function test_bilibili() {
+///Huawei
+async function test_Huawei() {
   let inner_check = () => {
     return new Promise((resolve) => {
       let option = {
-        url: 'https://www.bilibili.com',
+        url: 'http://connectivitycheck.platform.hicloud.com/generate_204',
         headers: REQUEST_HEADERS,
       }
-      bilibili_startTime = Date.now()
+      Huawei_startTime = Date.now()
       $httpClient.post(option, function (error, response, data) {
-        bilibili_endTime = Date.now()
+        Huawei_endTime = Date.now()
         resolve('1')
       })
     })
   }
 
-  bilibili_test_result =  'Bilibili' + '\xa0\xa0\xa0\xa0\xa0\xa0' + ': '
+  Huawei_test_result =  'Huawei' + '\xa0\xa0\xa0\xa0\xa0\xa0' + ': '
   await inner_check()
     .then((code) => {
-      bilibili_Delay = bilibili_endTime-bilibili_startTime + ""
+      Huawei_Delay = Huawei_endTime-Huawei_startTime + ""
       if (code === '1') {
-        bilibili_test_result += bilibili_Delay + ' ms'
+        Huawei_test_result += Huawei_Delay + ' ms'
       }
     })
   
-  return bilibili_test_result
+  return Huawei_test_result
 }
 ////youtube
 async function test_youtube() {
