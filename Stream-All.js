@@ -52,7 +52,7 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
     title: `解锁检测`,
     content: '',
     icon: args.icon || "play.circle",
-    "icon-color": args.color || "#007aff",
+    "icon-color": args.color || "#8EBABF",
   }
   let [{ region, status }] = await Promise.all([testDisneyPlus()])
   await Promise.all([check_youtube_premium(), check_netflix()])
