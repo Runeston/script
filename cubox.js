@@ -16,11 +16,11 @@ TG频道群：https://t.me/py
 
 [rewrite_local]
 
-^https:\/\/cubox\.pro\/c\/api\/userInfo url script-response-body https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/cubox.js
+^https:\/\/cubox\.(pro|cc)\/c\/api\/user(Info|Pay) url script-response-body https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/cubox.js
 
 [mitm] 
 
-hostname = cubox.pro
+hostname = cubox.cc
 
 *******************************/
 
