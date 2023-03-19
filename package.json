@@ -1,6 +1,6 @@
 {
-	"name": "Emby Icons",
-	"description": "By CSN",
+	"name": "NBA LOGOS",
+	"description": "By RUN",
 	"icons": [
 		{
 			"name": "Celtics",
@@ -51,24 +51,24 @@
 			"url": "https://github.com/Runeston/script/raw/main/Logo/DET.png"
 		},
 		{
-			"name": "pinyun-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/pinyun/round.png"
+			"name": "Pacers",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/INA.png"
 		},
 		{
-			"name": "pinyun-square",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/pinyun/square.png"
+			"name": "Grizzlies",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/MEM.png"
 		},
 		{
-			"name": "Cc-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Cc/round.png"
+			"name": "Heat",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/MIA.png"
 		},
 		{
-			"name": "Cc-square",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Cc/square.png"
+			"name": "Jazz",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/UTA.png"
 		},
 		{
-			"name": "Orange-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Orange/round.png"
+			"name": "Wizard",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/WAS.png"
 		},
 		{
 			"name": "Orange-square",
@@ -137,18 +137,6 @@
 		{
 			"name": "Misty-square",
 			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Misty/square.png"
-		},
-		{
-			"name": "Odyssey-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Odyssey/round.png"
-		},
-		{
-			"name": "Odyssey-square",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Odyssey/square.png"
-		},
-		{
-			"name": "Plus-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/Plus/round.png"
 		},
 		{
 			"name": "Free-square",
