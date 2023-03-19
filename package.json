@@ -3,24 +3,24 @@
 	"description": "By CSN",
 	"icons": [
 		{
-			"name": "emby-round",
-			"url": "https://raw.githubusercontent.com/Runeston/script/main/IMG_3633.PNG"
+			"name": "Celtics",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/BOS.png"
 		},
 		{
-			"name": "emby-square",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/emby/square.png"
+			"name": "Lakers",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/LAL.png"
 		},
 		{
-			"name": "csn-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/CSN/round.png"
+			"name": "Warriors",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/GSW.png"
 		},
 		{
-			"name": "csn-square",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/CSN/square.png"
+			"name": "Thunder",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/OKC.png"
 		},
 		{
-			"name": "MisakaF-round",
-			"url": "https://raw.githubusercontent.com/byte170202/emby-icon/main/MisakaF/round.png"
+			"name": "Raptors",
+			"url": "https://github.com/Runeston/script/raw/main/Logo/TOR.png"
 		},
 		{
 			"name": "MisakaF-square",
