@@ -11,60 +11,97 @@ const isQuanX = typeof $task !== "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let body;
 
-// console.log(`2022-12-22`);
+console.log(`2022-12-22`);
+if($request.method !== 'POST'){
+    $notification.post('贴吧proto去广告脚本错误', "请求方法不为POST:", url);
+}
 
 if (url.includes("frs/page")) {
-  // model.frs.FrsPageResIdl 并不是json中的完整路径,但可以使用
-  let frsPageResIdlType = tiebaRoot.lookupType("model.frs.FrsPageResIdl");
-  let frsPageResIdlObj = frsPageResIdlType.decode(binaryBody);
-  frsPageResIdlObj.data.threadList = removeLive(frsPageResIdlObj.data.threadList);
-  if (frsPageResIdlObj.data.activityhead?.isAd) {
-    frsPageResIdlObj.data.activityhead = null;
-  }
-  body = frsPageResIdlType.encode(frsPageResIdlObj).finish();
-} else if (url.includes("frs/threadlist")) {
-  let threadListResIdlType = tiebaRoot.lookupType("model.threadlist.ThreadListResIdl");
-  let threadListResIdlObj = threadListResIdlType.decode(binaryBody);
-  body = threadListResIdlType.encode(threadListResIdlObj).finish();
-} else if (url.includes("pb/page")) {
-  let pbPageResIdlType = tiebaRoot.lookupType("model.pb.PbPageResIdl");
-  let pbPageResIdlObj = pbPageResIdlType.decode(binaryBody);
-  if (pbPageResIdlObj.data.postList?.length) {
-    for (const post of pbPageResIdlObj.data.postList) {
-      if (post.outerItem) post.outerItem = null;
+    console.log('贴吧-FrsPage');
+    // model.frs.FrsPageResIdl 并不是json中的完整路径,但可以使用
+    let frsPageResIdlType = tiebaRoot.lookupType("model.frs.FrsPageResIdl");
+    let frsPageResIdlObj = frsPageResIdlType.decode(binaryBody);
+
+    frsPageResIdlObj.data.threadList = removeLive(frsPageResIdlObj.data.threadList);
+    if(frsPageResIdlObj.data.activityhead?.isAd){
+        console.log('frs去除吧内header图片广告');
+        frsPageResIdlObj.data.activityhead = null;
+    } else {
+        console.log('无需处理activityhead');
     }
-  }
-  if (pbPageResIdlObj.data.recomAlaInfo?.liveId) {
-    pbPageResIdlObj.data.recomAlaInfo = null;
-  }
-  body = pbPageResIdlType.encode(pbPageResIdlObj).finish();
+    body = frsPageResIdlType.encode(frsPageResIdlObj).finish();
+} else if (url.includes("frs/threadlist")) {
+    console.log('贴吧-threadlist');
+    let threadListResIdlType = tiebaRoot.lookupType("model.threadlist.ThreadListResIdl");
+    let threadListResIdlObj = threadListResIdlType.decode(binaryBody);
+
+    body = threadListResIdlType.encode(threadListResIdlObj).finish();
+} else if (url.includes("pb/page")) {
+    console.log('贴吧-PbPage');
+    let pbPageResIdlType = tiebaRoot.lookupType("model.pb.PbPageResIdl");
+    let pbPageResIdlObj = pbPageResIdlType.decode(binaryBody);
+    if(pbPageResIdlObj.data.postList?.length){
+        for (const post of pbPageResIdlObj.data.postList) {
+            if(post.outerItem){
+                console.log('outer_item去除');
+                post.outerItem = null;
+            }
+        }
+    } else {
+        console.log('无需处理postList中的outer_item');
+    }
+    if(pbPageResIdlObj.data.recomAlaInfo?.liveId){
+       console.log('帖子详情页推荐的直播广告去除');
+       pbPageResIdlObj.data.recomAlaInfo = null;
+    } else {
+        console.log('帖子详情页无直播广告');
+    }
+    body = pbPageResIdlType.encode(pbPageResIdlObj).finish();
 } else if (url.includes("excellent/personalized")) {
-  let personalizedResIdlType = tiebaRoot.lookupType("model.personalized.PersonalizedResIdl");
-  let personalizedResIdlObj = personalizedResIdlType.decode(binaryBody);
-  personalizedResIdlObj.data.threadList = removeLive(personalizedResIdlObj.data.threadList);
-  if (personalizedResIdlObj.data.liveAnswer) {
-    personalizedResIdlObj.data.liveAnswer = null;
-  }
-  body = personalizedResIdlType.encode(personalizedResIdlObj).finish();
+    console.log('贴吧-personalized');
+    let personalizedResIdlType = tiebaRoot.lookupType("model.personalized.PersonalizedResIdl");
+    let personalizedResIdlObj = personalizedResIdlType.decode(binaryBody);
+
+    personalizedResIdlObj.data.threadList = removeLive(personalizedResIdlObj.data.threadList);
+    if(personalizedResIdlObj.data.liveAnswer){
+        console.log('去除推荐页上方的banner广告');
+        personalizedResIdlObj.data.liveAnswer = null;
+    } else {
+        console.log('推荐页无banner广告');
+    }
+    body = personalizedResIdlType.encode(personalizedResIdlObj).finish();
 } else if (url.includes("frs/generalTabList")) {
-  let generalTabListResIdlType = tiebaRoot.lookupType(
-    "model.generaltablelist.GeneralTabListResIdl"
-  );
-  let generalTabListResIdlObj = generalTabListResIdlType.decode(binaryBody);
-  body = generalTabListResIdlType.encode(generalTabListResIdlObj).finish();
+    console.log('贴吧-generalTabList');
+    let generalTabListResIdlType = tiebaRoot.lookupType("model.generaltablelist.GeneralTabListResIdl");
+    let generalTabListResIdlObj = generalTabListResIdlType.decode(binaryBody);
+    body = generalTabListResIdlType.encode(generalTabListResIdlObj).finish();
+} else {
+    $notification.post('贴吧proto去广告脚本错误', "url匹配错误:", url);
 }
 // body.byteLength 和 body.buffer.byteLength 不一定相同 (如帖子没有回复/少量回复时)
-if (isQuanX) {
-  $done({ bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset) });
+console.log(`${body.byteLength}---${body.buffer.byteLength}`);
+if(isQuanX){
+    $done({bodyBytes: body.buffer.slice(body.byteOffset, body.byteLength + body.byteOffset)});
 } else {
-  $done({ body });
+    $done({body});
 }
 
 function removeLive(threadList) {
-  let newThreadList = threadList;
-  const beforeLength = threadList?.length;
-  if (beforeLength) {
-    newThreadList = threadList.filter((item) => !item.alaInfo);
-  }
-  return newThreadList;
+    let newThreadList = threadList;
+    const beforeLength = threadList?.length;
+    if(beforeLength){
+        newThreadList = threadList.filter(item => {
+            if(item.alaInfo){
+                console.log('去除推荐的直播帖子');
+                return false;
+            }
+            return true;
+        });
+        if(beforeLength === newThreadList.length){
+            console.log("无推荐的直播帖子");
+        }
+    } else {
+        console.log('无需处理threadList');
+    }
+    return newThreadList;
 }
