@@ -1,0 +1,19 @@
+let headers = ObjectKeys2LowerCase($request.headers)
+
+headers['mconfig-info'] = '{"zr4bw6pKFDIZScpo":{"version":1218560,"appver":"9.0.08"},"tPJJnts2H31BZXmp":{"version":2607104,"appver":"2.0.30"},"c0Ve6C0uNl2Am0Rl":{"version":595968,"appver":"1.7.50"},"IuRPVVmc3WWul9fT":{"version":28729344,"appver":"9.0.08"}}'
+headers['user-agent'] = 'NeteaseMusic 9.0.08/4702 (iPhone; iOS 17.2.1; zh_CN)'
+headers['cookie'] = 'MUSIC_U=00144CD1D8AB70ECEEA398ADA7DA1057E1567F9A256E0A2692B51A564A93B73EC4B8EE7292BFDDCC6255612A5F736DC756E74E44D078B6B13934D1ACE2FEABDD618609AD8877584F45DDDA6BA8FD8F240F5BFE06D80D7A46349A73B1785AF1C8E74E461855396ED3B0E07C570B47B10FB5D86CF2ABEA56769D734325D9DF87A5CC842885D30A334C1CC589DF09DD026D6EEB2015CC994F8E07888BD829C52ACAA523A6CBA6F6D813C2ED8693C7ABE625B5332F56AE10BBAE41F4AA8C2992DB937E7CB8F5106E5CE3F6B6382E7FB281C748917555C85032E6B3298C32149DEEDC36A41FC3583A30FF72DD3C22A382E31C1946E8E06204450AB6A6DD884D37D672E33414B2CB04AD86148068927201D51DA525C871E8634FF045727D52D7062B24EF; NMTID=00Ob3GKySb-fFhPpk4xrDLNCVIsVegAAAGM56KYRw; caid={"lastIyunId":"0fd6580ef9441aa5b79adf6a21b11f2f","iyunId":"6b68d5ffb33b5bdda1c148b837e7456c","iyunVersion":"20230330","lastIyunVersion":"20220111"}; buildver=4702; sDeviceId=39c27a6033e26b38fb8d6245cfdc8e07; channel=distribution; idfa=00000000-0000-0000-0000-000000000000; packageType=release; appver=9.0.08; deviceId=39c27a6033e26b38fb8d6245cfdc8e07; EVNSM=1.0.0; os=iPhone OS; osver=17.2.1; machineid=iPhone16.1; NMCID=oyuvqh.1704693244000.01.3; appkey=IuRPVVmc3WWul9fT; idfv=9721279C-07E6-4CE7-B753-0EBF8E31E9A7; URS_APPID=61327C07E36A5620781420688BD10918F79C86EA81301DA1CF01D7A606869A04FFE6C6BFD71E396E78C7602A71EA459C; NMDI=Q1NKTQcBDABj6VnajpHPq5Ow3hqWAAAAYRtMY4Ufj3CuI3i7MUayJfbbAEAk4Y5TP4gsGJ4ubjWC%2BfP3DBM14mEfCseuf%2BMSf4ryjfLy0Fe0jvkvwyAi1BYxyTZvPTtW2suYgnRdugiuy6%2F7ZAvaSfh1iUkkmfbVUKSvmq%2BW5vGQKLs%2F3C5e3XxsHUwMqm9MyQfEAbrrR65%2BsLRi5QZgfzdTNt1OCZ5szN2sdh36'
+
+$done({ headers })
+
+function ObjectKeys2LowerCase(obj) {
+    const _lower = Object.fromEntries(Object.entries(obj).map(([k, v]) => [k.toLowerCase(), v]))
+    return new Proxy(_lower, {
+        get: function (target, propKey, receiver) {
+            return Reflect.get(target, propKey.toLowerCase(), receiver)
+        },
+        set: function (target, propKey, value, receiver) {
+            return Reflect.set(target, propKey.toLowerCase(), value, receiver)
+        }
+    })
+}
