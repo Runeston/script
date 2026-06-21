@@ -5,7 +5,7 @@ try {
   const data = JSON.parse(body);
 
   if (data && data.user && Object.prototype.hasOwnProperty.call(data.user, 'rCoin')) {
-    data.user.rCoin = 83;
+    data.user.rCoin = 96394908.61;
   }
 
   body = JSON.stringify(data);
