@@ -1,0 +1,19 @@
+// 获取原始响应体
+let body = $response.body;
+
+if (body) {
+    try {
+        let obj = JSON.parse(body);
+        // 检查 result 字段是否存在并修改目标数值
+        if (obj.result && obj.result.hupuDollor_balance !== undefined) {
+            obj.result.hupuDollor_balance = 967;
+        }
+        // 返回修改后的响应体
+        $done({ body: JSON.stringify(obj) });
+    } catch (e) {
+        // 如果解析失败则直接返回原数据
+        $done({});
+    }
+} else {
+    $done({});
+}
